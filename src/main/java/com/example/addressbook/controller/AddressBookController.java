@@ -23,15 +23,15 @@ public class AddressBookController {
         return new ResponseEntity<String>("Welcome, User " + id,HttpStatus.OK);
     }
 
-//    @PostMapping("/create")
-//    public ResponseEntity<String> createContact(@RequestBody Contact contact) {
-//        return new ResponseEntity<String>("Added " + contact + " to list",HttpStatus.OK);
-//    }
-//
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<String> updateContact(@PathVariable("id") int id,@RequestBody Contact contact) {
-//        return new ResponseEntity<String>("Updated address book of id : " + id +" "+contact,HttpStatus.OK);
-//    }
+    @PostMapping("/create")
+    public ResponseEntity<String> createContact(@RequestBody Contact contact) {
+        return new ResponseEntity<String>("Added " + contact + " to list",HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateContact(@PathVariable("id") int id,@RequestBody Contact contact) {
+        return new ResponseEntity<String>("Updated address book of id : " + id +" "+contact,HttpStatus.OK);
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteContact(@PathVariable String id) {
