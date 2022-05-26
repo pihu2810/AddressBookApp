@@ -11,38 +11,46 @@ import java.util.List;
 @Service
 public class AddressBookService implements IAddressBookService
 {
+
+    List<Contact> contactList = new ArrayList<>();
+
     @Override
     public List<Contact> getContact() {
-        List<Contact> contactList = new ArrayList<>();
-        contactList.add(new Contact(1,
-                new ContactDTO("Vishaka", "Kadam", "LB Nager", "TS", "HYD", "500035", "9743546574","vishu@123gmail.com")));
-        System.out.println(contactList.toString());
 
         return contactList;
     }
 
     @Override
     public Contact getContactById(int contactId) {
-        Contact contact = new Contact(1,
-                new ContactDTO("Shanvika", "j", "TNR", "MH", "Mumbai", "500098", "86536553575","pihu@123"));
-        return contact;
+
+        return contactList.get(contactId - 1);
     }
 
     @Override
     public Contact createContact(ContactDTO contactDTO) {
-        Contact contact = new Contact(1, contactDTO);
-        return contact;
+        List<Contact> contactData = this.getContact();
+        contactList.add( new Contact(contactData.size() + 1, contactDTO));
+        return contactList.get(contactList.size() - 1);
     }
 
     @Override
     public Contact updateContact(int contactId, ContactDTO contactDTO) {
-        Contact contact = new Contact(1, contactDTO);
+        Contact contact = this.getContactById(contactId);
+        contact.setFirstName(contactDTO.getFirstName());
+        contact.setLastName(contactDTO.getLastName());
+        contact.setAddress(contactDTO.getAddress());
+        contact.setState(contactDTO.getState());
+        contact.setCity(contactDTO.getCity());
+        contact.setZip(contactDTO.getZip());
+        contact.setPhone(contactDTO.getPhone());
+        contact.setEmail(contactDTO.getEmail());
+        contactList.set(contactId - 1, contact);
         return contact;
     }
 
     @Override
     public void deleteContact(int contactId) {
-        // TODO Auto-generated method stub
+        contactList.remove(contactId-1);
 
     }
 
